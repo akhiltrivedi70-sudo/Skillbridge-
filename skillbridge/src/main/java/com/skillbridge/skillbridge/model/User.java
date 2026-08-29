@@ -24,4 +24,11 @@ public class User {
     private String bio;
 
     private String location;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
+
+    public enum Role {
+        USER, MENTOR, RECRUITER, ADMIN
+    }
 }

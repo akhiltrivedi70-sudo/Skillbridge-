@@ -1,3 +1,4 @@
+
 package com.skillbridge.skillbridge.service;
 
 import com.skillbridge.skillbridge.model.*;
@@ -69,5 +70,25 @@ public class JobService {
                 .filter(req -> !userSkillMap.containsKey(req.getSkill().getId()))
                 .map(req -> req.getSkill().getName())
                 .toList();
+    }
+
+    public Map<String, List<User>> getMentorsForMissingSkills(Long userId, Long jobId) {
+        List<String> missingSkillNames = getMissingSkills(userId, jobId);
+        List<JobRequiredSkill> requiredSkills = jobRequiredSkillRepository.findByJobId(jobId);
+
+        Map<String, List<User>> result = new HashMap<>();
+
+        for (JobRequiredSkill req : requiredSkills) {
+            if (missingSkillNames.contains(req.getSkill().getName())) {
+                List<User> mentors = userSkillRepository.findBySkillId(req.getSkill().getId())
+                        .stream()
+                        .map(UserSkill::getUser)
+                        .filter(user -> !user.getId().equals(userId))
+                        .toList();
+                result.put(req.getSkill().getName(), mentors);
+            }
+        }
+
+        return result;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/jobs")
@@ -37,5 +38,10 @@ public class JobController {
     @GetMapping("/{jobId}/missing-skills/{userId}")
     public List<String> getMissingSkills(@PathVariable Long jobId, @PathVariable Long userId) {
         return jobService.getMissingSkills(userId, jobId);
+    }
+
+    @GetMapping("/{jobId}/mentors-for-missing-skills/{userId}")
+    public Map<String, List<User>> getMentorsForMissingSkills(@PathVariable Long jobId, @PathVariable Long userId) {
+        return jobService.getMentorsForMissingSkills(userId, jobId);
     }
 }

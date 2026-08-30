@@ -23,4 +23,9 @@ public class UserSkillController {
     public List<UserSkill> getSkillsByUser(@PathVariable Long userId) {
         return userSkillService.getSkillsByUser(userId);
     }
+
+    @GetMapping("/skill/{skillId}")
+    public List<UserSkill> getUsersBySkill(@PathVariable Long skillId) {
+        return userSkillService.getUsersBySkill(skillId);
+    }
 }

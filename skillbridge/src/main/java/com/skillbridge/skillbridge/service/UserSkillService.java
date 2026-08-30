@@ -20,4 +20,8 @@ public class UserSkillService {
     public List<UserSkill> getSkillsByUser(Long userId) {
         return userSkillRepository.findByUserId(userId);
     }
+
+    public List<UserSkill> getUsersBySkill(Long skillId) {
+        return userSkillRepository.findBySkillId(skillId);
+    }
 }

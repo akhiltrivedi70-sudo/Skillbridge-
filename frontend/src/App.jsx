@@ -22,60 +22,73 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      const data = await response.json();
-      setMessage(isLogin ? data : `Registered successfully! Welcome ${data.name}`);
+
+      if (isLogin) {
+        const text = await response.text();
+        setMessage(text);
+      } else {
+        const data = await response.json();
+        setMessage(`Registered successfully! Welcome ${data.name}`);
+      }
     } catch (error) {
       setMessage('Something went wrong. Is the backend running?');
     }
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '50px auto', fontFamily: 'Arial' }}>
-      <h2>SkillBridge - {isLogin ? 'Login' : 'Register'}</h2>
+    <div className="auth-container">
+      <div className="auth-logo">🌉</div>
+      <h2 className="auth-title">SkillBridge</h2>
+      <p className="auth-subtitle">
+        {isLogin ? 'Welcome back! Login to continue' : 'Create your account to get started'}
+      </p>
 
       <form onSubmit={handleSubmit}>
         {!isLogin && (
-          <div style={{ marginBottom: '10px' }}>
+          <div className="input-group">
+            <span className="input-icon">👤</span>
             <input
               type="text"
               name="name"
-              placeholder="Name"
+              placeholder="Full Name"
               value={formData.name}
               onChange={handleChange}
-              style={{ width: '100%', padding: '8px' }}
+              className="input-field"
             />
           </div>
         )}
-        <div style={{ marginBottom: '10px' }}>
+        <div className="input-group">
+          <span className="input-icon">📧</span>
           <input
             type="email"
             name="email"
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            style={{ width: '100%', padding: '8px' }}
+            className="input-field"
           />
         </div>
-        <div style={{ marginBottom: '10px' }}>
+        <div className="input-group">
+          <span className="input-icon">🔒</span>
           <input
             type="password"
             name="password"
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            style={{ width: '100%', padding: '8px' }}
+            className="input-field"
           />
         </div>
-        <button type="submit" style={{ width: '100%', padding: '10px' }}>
-          {isLogin ? 'Login' : 'Register'}
+        <button type="submit" className="submit-btn">
+          {isLogin ? 'Login' : 'Create Account'}
         </button>
       </form>
 
-      <p onClick={() => setIsLogin(!isLogin)} style={{ cursor: 'pointer', color: 'blue' }}>
+      <p className="toggle-link" onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? "Don't have an account? Register" : 'Already have an account? Login'}
       </p>
 
-      {message && <p style={{ marginTop: '20px' }}>{JSON.stringify(message)}</p>}
+      {message && <div className="message-box">{JSON.stringify(message)}</div>}
     </div>
   );
 }

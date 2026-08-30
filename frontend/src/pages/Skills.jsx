@@ -39,51 +39,39 @@ function Skills() {
     fetchMySkills();
   };
 
+  const levelEmoji = { BEGINNER: '🌱', INTERMEDIATE: '🌿', ADVANCED: '🌳' };
+
   return (
     <div>
       <Navbar />
-      <div style={{ padding: '40px', maxWidth: '700px', margin: '0 auto' }}>
-        <h1 style={{ marginBottom: '20px' }}>My Skills</h1>
+      <div className="page-container">
+        <h1 className="page-title">My Skills 🎯</h1>
+        <p className="page-subtitle">Add the skills you know and track your proficiency level.</p>
 
-        <div style={{ background: '#f9fafb', padding: '20px', borderRadius: '10px', marginBottom: '30px' }}>
-          <h3 style={{ marginBottom: '12px' }}>Add a Skill</h3>
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <select
-              value={selectedSkill}
-              onChange={(e) => setSelectedSkill(e.target.value)}
-              style={{ flex: 1, padding: '10px' }}
-            >
+        <div className="card" style={{ marginBottom: '32px' }}>
+          <h3 style={{ marginBottom: '16px' }}>Add a New Skill</h3>
+          <div className="form-row">
+            <select value={selectedSkill} onChange={(e) => setSelectedSkill(e.target.value)} className="select-field" style={{ flex: 1, minWidth: '180px' }}>
               <option value="">Select a skill</option>
               {allSkills.map((skill) => (
                 <option key={skill.id} value={skill.id}>{skill.name}</option>
               ))}
             </select>
-            <select value={level} onChange={(e) => setLevel(e.target.value)} style={{ padding: '10px' }}>
-              <option value="BEGINNER">Beginner</option>
-              <option value="INTERMEDIATE">Intermediate</option>
-              <option value="ADVANCED">Advanced</option>
+            <select value={level} onChange={(e) => setLevel(e.target.value)} className="select-field">
+              <option value="BEGINNER">🌱 Beginner</option>
+              <option value="INTERMEDIATE">🌿 Intermediate</option>
+              <option value="ADVANCED">🌳 Advanced</option>
             </select>
-            <button onClick={handleAddSkill} style={{ padding: '10px 20px', cursor: 'pointer' }}>
-              Add
-            </button>
+            <button onClick={handleAddSkill} className="primary-btn">+ Add Skill</button>
           </div>
         </div>
 
-        <h3 style={{ marginBottom: '12px' }}>Your Skills</h3>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-          {mySkills.length === 0 && <p style={{ color: '#9ca3af' }}>No skills added yet.</p>}
+        <h3 style={{ marginBottom: '16px' }}>Your Skills</h3>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+          {mySkills.length === 0 && <p className="empty-state">No skills added yet. Add your first skill above!</p>}
           {mySkills.map((us) => (
-            <div
-              key={us.id}
-              style={{
-                background: '#ede9fe',
-                color: '#5b21b6',
-                padding: '8px 16px',
-                borderRadius: '20px',
-                fontSize: '14px',
-              }}
-            >
-              {us.skill.name} — {us.level}
+            <div className="badge" key={us.id}>
+              {levelEmoji[us.level]} {us.skill.name} — {us.level}
             </div>
           ))}
         </div>

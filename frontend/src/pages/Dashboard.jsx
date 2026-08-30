@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 function Dashboard() {
   const [dashboardData, setDashboardData] = useState(null);
-  const navigate = useNavigate();
   const userId = localStorage.getItem('userId') || 1;
 
   useEffect(() => {
@@ -13,42 +12,35 @@ function Dashboard() {
       .catch((err) => console.error(err));
   }, [userId]);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate('/login');
-  };
-
   return (
-    <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-        <h1>Welcome to SkillBridge 🌉</h1>
-        <button onClick={handleLogout} style={{ padding: '8px 16px', cursor: 'pointer' }}>
-          Logout
-        </button>
-      </div>
+    <div>
+      <Navbar />
+      <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto' }}>
+        <h1 style={{ marginBottom: '30px' }}>Welcome to SkillBridge 🌉</h1>
 
-      {dashboardData ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
-          <div style={{ background: '#f3f4f6', padding: '20px', borderRadius: '10px' }}>
-            <h3>Unread Messages</h3>
-            <p style={{ fontSize: '32px', fontWeight: 'bold' }}>{dashboardData.unreadMessages}</p>
+        {dashboardData ? (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+            <div style={{ background: '#f3f4f6', padding: '20px', borderRadius: '10px' }}>
+              <h3>Unread Messages</h3>
+              <p style={{ fontSize: '32px', fontWeight: 'bold' }}>{dashboardData.unreadMessages}</p>
+            </div>
+            <div style={{ background: '#f3f4f6', padding: '20px', borderRadius: '10px' }}>
+              <h3>Received Requests</h3>
+              <p style={{ fontSize: '32px', fontWeight: 'bold' }}>{dashboardData.receivedRequests}</p>
+            </div>
+            <div style={{ background: '#f3f4f6', padding: '20px', borderRadius: '10px' }}>
+              <h3>Sent Requests</h3>
+              <p style={{ fontSize: '32px', fontWeight: 'bold' }}>{dashboardData.sentRequests}</p>
+            </div>
+            <div style={{ background: '#f3f4f6', padding: '20px', borderRadius: '10px' }}>
+              <h3>Assessments Taken</h3>
+              <p style={{ fontSize: '32px', fontWeight: 'bold' }}>{dashboardData.assessmentsTaken}</p>
+            </div>
           </div>
-          <div style={{ background: '#f3f4f6', padding: '20px', borderRadius: '10px' }}>
-            <h3>Received Requests</h3>
-            <p style={{ fontSize: '32px', fontWeight: 'bold' }}>{dashboardData.receivedRequests}</p>
-          </div>
-          <div style={{ background: '#f3f4f6', padding: '20px', borderRadius: '10px' }}>
-            <h3>Sent Requests</h3>
-            <p style={{ fontSize: '32px', fontWeight: 'bold' }}>{dashboardData.sentRequests}</p>
-          </div>
-          <div style={{ background: '#f3f4f6', padding: '20px', borderRadius: '10px' }}>
-            <h3>Assessments Taken</h3>
-            <p style={{ fontSize: '32px', fontWeight: 'bold' }}>{dashboardData.assessmentsTaken}</p>
-          </div>
-        </div>
-      ) : (
-        <p>Loading dashboard...</p>
-      )}
+        ) : (
+          <p>Loading dashboard...</p>
+        )}
+      </div>
     </div>
   );
 }

@@ -16,6 +16,7 @@ function Navbar() {
         <Link to="/skills" className="navbar-link">Skills</Link>
         <Link to="/matching" className="navbar-link">Find Mentors</Link>
         <Link to="/jobs" className="navbar-link">Jobs</Link>
+        <Link to="/connections" className="navbar-link">Connections</Link>
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </div>
     </nav>

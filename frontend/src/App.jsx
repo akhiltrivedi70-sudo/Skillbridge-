@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Skills from './pages/Skills';
 import Matching from './pages/Matching';
 import Jobs from './pages/Jobs';
+import Connections from './pages/Connections';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Route path="/skills" element={<Skills />} />
       <Route path="/matching" element={<Matching />} />
       <Route path="/jobs" element={<Jobs />} />
+      <Route path="/connections" element={<Connections />} />
       <Route path="/" element={<Navigate to="/login" />} />
     </Routes>
   );

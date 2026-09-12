@@ -6,6 +6,7 @@ function Jobs() {
   const [jobDetails, setJobDetails] = useState({});
   const [expandedJob, setExpandedJob] = useState(null);
   const [mentorSuggestions, setMentorSuggestions] = useState({});
+  const [searchTerm, setSearchTerm] = useState('');
   const userId = localStorage.getItem('userId') || 1;
 
   useEffect(() => {
@@ -46,6 +47,15 @@ function Jobs() {
     return '#dc2626';
   };
 
+  const filteredJobs = jobs.filter((job) => {
+    const term = searchTerm.toLowerCase();
+    return (
+      job.title.toLowerCase().includes(term) ||
+      job.company.toLowerCase().includes(term) ||
+      (job.location && job.location.toLowerCase().includes(term))
+    );
+  });
+
   return (
     <div>
       <Navbar />
@@ -53,11 +63,26 @@ function Jobs() {
         <h1 className="page-title">Job Opportunities 💼</h1>
         <p className="page-subtitle">Jobs matched to your skills, with mentor suggestions for anything you're missing.</p>
 
-        {jobs.length === 0 ? (
-          <div className="card"><p className="empty-state">No jobs posted yet.</p></div>
+        <div className="card" style={{ marginBottom: '32px' }}>
+          <div className="form-row">
+            <input
+              type="text"
+              placeholder="🔍 Search by job title, company, or location..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="form-input"
+              style={{ flex: 1, minWidth: '250px' }}
+            />
+          </div>
+        </div>
+
+        {filteredJobs.length === 0 ? (
+          <div className="card"><p className="empty-state">
+            {searchTerm ? 'No jobs match your search.' : 'No jobs posted yet.'}
+          </p></div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            {jobs.map((job) => {
+            {filteredJobs.map((job) => {
               const details = jobDetails[job.id];
               const match = details?.match ?? 0;
               const missing = details?.missing ?? [];

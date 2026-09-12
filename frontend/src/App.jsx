@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Skills from './pages/Skills';
 import Matching from './pages/Matching';
+import Jobs from './pages/Jobs';
 import './App.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/skills" element={<Skills />} />
       <Route path="/matching" element={<Matching />} />
+      <Route path="/jobs" element={<Jobs />} />
       <Route path="/" element={<Navigate to="/login" />} />
     </Routes>
   );

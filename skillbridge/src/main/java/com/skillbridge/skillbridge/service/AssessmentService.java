@@ -24,6 +24,19 @@ public class AssessmentService {
         return assessmentRepository.save(assessment);
     }
 
+    public Assessment getOrCreateAssessmentForSkill(Long skillId) {
+        List<Assessment> existing = assessmentRepository.findBySkillId(skillId);
+        if (!existing.isEmpty()) {
+            return existing.get(0);
+        }
+        Assessment newAssessment = new Assessment();
+        Skill skill = new Skill();
+        skill.setId(skillId);
+        newAssessment.setSkill(skill);
+        newAssessment.setTitle("Skill Assessment");
+        return assessmentRepository.save(newAssessment);
+    }
+
     public AssessmentQuestion addQuestion(AssessmentQuestion question) {
         return questionRepository.save(question);
     }

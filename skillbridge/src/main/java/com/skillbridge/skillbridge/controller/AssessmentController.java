@@ -20,6 +20,11 @@ public class AssessmentController {
         return assessmentService.createAssessment(assessment);
     }
 
+    @GetMapping("/for-skill/{skillId}")
+    public Assessment getOrCreateForSkill(@PathVariable Long skillId) {
+        return assessmentService.getOrCreateAssessmentForSkill(skillId);
+    }
+
     @PostMapping("/question/add")
     public AssessmentQuestion addQuestion(@RequestBody AssessmentQuestion question) {
         return assessmentService.addQuestion(question);

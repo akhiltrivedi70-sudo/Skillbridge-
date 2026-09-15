@@ -5,6 +5,7 @@ import Skills from './pages/Skills';
 import Matching from './pages/Matching';
 import Jobs from './pages/Jobs';
 import Connections from './pages/Connections';
+import Messages from './pages/Messages';
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Route path="/matching" element={<Matching />} />
       <Route path="/jobs" element={<Jobs />} />
       <Route path="/connections" element={<Connections />} />
+      <Route path="/messages" element={<Messages />} />
       <Route path="/" element={<Navigate to="/login" />} />
     </Routes>
   );

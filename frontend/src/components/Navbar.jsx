@@ -18,6 +18,7 @@ function Navbar() {
         <Link to="/jobs" className="navbar-link">Jobs</Link>
         <Link to="/connections" className="navbar-link">Connections</Link>
         <Link to="/messages" className="navbar-link">Messages</Link>
+        <Link to="/reviews" className="navbar-link">Reviews</Link>
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </div>
     </nav>

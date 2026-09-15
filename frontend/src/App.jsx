@@ -7,6 +7,7 @@ import Jobs from './pages/Jobs';
 import Connections from './pages/Connections';
 import Messages from './pages/Messages';
 import Reviews from './pages/Reviews';
+import Assessment from './pages/Assessment';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path="/connections" element={<Connections />} />
       <Route path="/messages" element={<Messages />} />
       <Route path="/reviews" element={<Reviews />} />
+      <Route path="/assessment" element={<Assessment />} />
       <Route path="/" element={<Navigate to="/login" />} />
     </Routes>
   );

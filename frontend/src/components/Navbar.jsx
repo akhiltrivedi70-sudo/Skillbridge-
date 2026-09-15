@@ -19,6 +19,7 @@ function Navbar() {
         <Link to="/connections" className="navbar-link">Connections</Link>
         <Link to="/messages" className="navbar-link">Messages</Link>
         <Link to="/reviews" className="navbar-link">Reviews</Link>
+        <Link to="/assessment" className="navbar-link">Assessment</Link>
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </div>
     </nav>
